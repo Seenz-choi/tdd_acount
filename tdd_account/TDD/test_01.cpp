@@ -3,26 +3,44 @@ class Account
 {
 public:
 	Account(int balance)
-		: balance(balance)
+		: balance_(balance)
 	{
 	}
 	int getBalance()
 	{
-		return balance;
+		return balance_;
 	}
 
 	void depoist(int money)
 	{
-		balance += money;
+		balance_ += money;
 	}
 
 	void withdraw(int money)
 	{
-		balance -= money;
+		balance_ -= money;
 	}
 
+	void setInterestCompound()
+	{
+		balance_ += balance_ * interest_ / 100;
+	}
+
+	void setInterest(int interest)
+	{
+		interest_ = interest;
+	}
+
+	void checkNYearsAfter(int year)
+	{
+		for (int i = 0; i < year; i++)
+		{
+			setInterestCompound();
+		}
+	}
 private:
-	int balance = 10000;
+	int balance_ = 10000;
+	int interest_ = 5;
 };
 
 #ifndef GTEST_INCLUDE_GTEST_GTEST_H_

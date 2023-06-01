@@ -20,3 +20,21 @@ TEST_F(AccountFixture, Withdraw) {
 	account.withdraw(600);
 	EXPECT_EQ(9400, account.getBalance());
 }
+
+TEST_F(AccountFixture, setInterestCompound) {
+	account.setInterestCompound();
+	EXPECT_EQ(10500, account.getBalance());
+}
+
+TEST_F(AccountFixture, setInterest) {
+	account.setInterest(3);
+	account.setInterestCompound();
+	EXPECT_EQ(10300, account.getBalance());
+}
+
+TEST_F(AccountFixture, checkNYearsAfter) {
+	account.setInterest(10);
+	account.checkNYearsAfter(3);
+	account.setInterestCompound();
+	EXPECT_EQ(14641, account.getBalance());
+}
